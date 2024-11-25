@@ -1,0 +1,105 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 1em 0;
+    background: #0f3460;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    background: #e94560;
+}
+
+nav button {
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+nav button:hover {
+    background: #1a1a2e;
+}
+
+main {
+    padding: 2em;
+    text-align: center;
+}
+
+main h2 {
+    margin-bottom: 1em;
+    font-size: 1.8rem;
+    color: #e94560;
+}
+
+/* Styles des commandes */
+.command {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #16213e;
+    border: 1px solid #1a1a2e;
+    padding: 1em;
+    margin: 0.5em 0;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.command:hover {
+    background: #0f3460;
+}
+.command div {
+    flex: 1;
+}
+
+.command-text {
+    flex: 1;
+    color: #fff;
+    text-align: left;
+}
+
+.copy-btn {
+    background: #e94560;
+    color: #fff;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 1em;
+    transition: 0.3s;
+}
+
+.copy-btn:hover {
+    background: #ff5e78;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background: #0f3460;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
