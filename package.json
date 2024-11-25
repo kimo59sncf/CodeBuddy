@@ -1,0 +1,55 @@
+{
+  "name": "codebuddy",
+  "version": "1.0.0",
+  "description": "Une application Electron pour les commandes Git, Docker, Linux, Node.js et Python.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.codebuddy",
+    "productName": "CodeBuddy",
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "script.js",
+      "icon.*"
+    ],
+    "directories": {
+      "output": "release-build"
+    },
+    "mac": {
+      "icon": "icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "icon": "icon.png",
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ]
+    }
+  },
+  "author": "Karim Mahouachi",
+  "email": "karim.dev59@gmail.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^23.6.0"
+  }
+  
+}
