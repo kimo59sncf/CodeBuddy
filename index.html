@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +9,48 @@
 <body>
     <header>
         <h1>CodeBuddy: Guide des Commandes pour Développeurs</h1>
+        <div class="export-buttons">
+            <button onclick="exportToPNG()">Exporter en PNG</button>
+            <button onclick="exportToPDF()">Exporter en PDF</button>
+        </div>
     </header>
     <nav>
         <button onclick="showCommands('git')">Git/GitHub</button>
         <button onclick="showCommands('docker')">Docker</button>
         <button onclick="showCommands('linux')">Linux</button>
-        <button onclick="showCommands('node')">Node.js/NPM</button>
-        <button onclick="showCommands('python')">Python/Pip</button>
+        <button onclick="showCommands('node/npm')">Node.js/NPM</button>
+        <button onclick="showCommands('python/pip')">Python/Pip</button>
+        
     </nav>
     <main id="content">
-        <h2>Bienvenue</h2>
-        <p>Sélectionnez une catégorie pour afficher les commandes.</p>
+        <div class="search-bar">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Rechercher une commande ou une fonction..." 
+                oninput="filterCommands()">
+            <select id="sortOptions" onchange="sortCommands()">
+                <option value="default">Trier par</option>
+                <option value="category">Catégorie</option>
+                <option value="complexity">Complexité</option>
+                <option value="usage">Fréquence d'utilisation</option>
+            </select>
+            <button onclick="showFavorites()">Afficher les favoris</button>
+            <button onclick="exportCommands()">Exporter JSON</button>
+        </div>
+        <div id="commandList">
+            <p>Sélectionnez une catégorie pour afficher les commandes ou utilisez la barre de recherche.</p>
+        </div>
+
+        
+        
     </main>
     <footer>
         <p>© 2024 CodeBuddy - Créé avec ❤️</p>
     </footer>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </body>
 </html>
