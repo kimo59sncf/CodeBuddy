@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miniature</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #16213e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            background: #e94560;
+            color: #fff;
+            padding: 0.5em;
+            text-align: right;
+        }
+
+        #header button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        #header button:hover {
+            color: #ff5e78;
+        }
+
+        #content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2, p {
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <button id="close-miniature">❌</button>
+    </div>
+    <div id="content">
+        <div>
+            <h2>CodeBuddy - Miniature</h2>
+            <p>Gardez un œil sur vos commandes !</p>
+        </div>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        // Bouton pour fermer la miniature
+        const closeButton = document.getElementById('close-miniature');
+        closeButton.addEventListener('click', () => {
+            ipcRenderer.send('close-mini-window');
+        });
+
+        // Basculer entre les thèmes sombre et clair
+        ipcRenderer.on('toggle-theme', (event, theme) => {
+            if (theme === 'light') {
+                document.body.style.backgroundColor = '#ffffff';
+                document.body.style.color = '#000000';
+            } else {
+                document.body.style.backgroundColor = '#16213e';
+                document.body.style.color = '#ffffff';
+            }
+        });
+    </script>
+</body>
+</html>
