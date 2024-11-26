@@ -3,56 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBuddy - Dev Commands Guide</title>
+    <title>CodeBuddy</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h1>CodeBuddy: Guide des Commandes pour Développeurs</h1>
+        <!-- Boutons d'exportation -->
         <div class="export-buttons">
-            <button onclick="exportToPNG()">Exporter en PNG</button>
-            <button onclick="exportToPDF()">Exporter en PDF</button>
+            <button onclick="exportCommands()">Exporter JSON</button>
+            <button onclick="exportToPNG()">Exporter PNG</button>
+            <button onclick="exportToPDF()">Exporter PDF</button>
         </div>
-        <button id="toggle-theme">Basculer Mode</button>
-        <button id="toggle-miniature">🔳 Miniature</button>
+        <!-- Toggle miniature -->
+        <div class="miniature-toggle">
+            <input type="checkbox" id="miniature-toggle">
+            <label for="miniature-toggle">Activer miniature</label>
+        </div>
+        <button id="toggle-theme" class="theme-toggle">🌙</button>
     </header>
     <nav>
-        <button onclick="showCommands('git')">Git/GitHub</button>
-        <button onclick="showCommands('docker')">Docker</button>
+        <!-- Boutons de catégories -->
+        <button onclick="showCommands('git')">Git</button>
         <button onclick="showCommands('linux')">Linux</button>
-        <button onclick="showCommands('node/npm')">Node.js/NPM</button>
+        <button onclick="showCommands('docker')">Docker</button>
+        <button onclick="showCommands('node/npm')">Node/NPM</button>
         <button onclick="showCommands('python/pip')">Python/Pip</button>
-        
+        <button onclick="showFavorites()">Favoris</button>
+        <button onclick="displayAllCommands(commands)">Tout</button>
     </nav>
-    <main id="content">
-        <div class="search-bar">
-            <input 
-                type="text" 
-                id="searchInput" 
-                placeholder="Rechercher une commande ou une fonction..." 
-                oninput="filterCommands()">
-            <select id="sortOptions" onchange="sortCommands()">
-                <option value="default">Trier par</option>
-                <option value="category">Catégorie</option>
-                <option value="complexity">Complexité</option>
-                <option value="usage">Fréquence d'utilisation</option>
-            </select>
-            <button onclick="showFavorites()">Afficher les favoris</button>
-            <button onclick="exportCommands()">Exporter JSON</button>
-        </div>
-        <div id="commandList">
-            <p>Sélectionnez une catégorie pour afficher les commandes ou utilisez la barre de recherche.</p>
-        </div>
-
-        
-        
+    <div class="search-bar">
+        <!-- Barre de recherche et tri -->
+        <input type="text" id="searchInput" oninput="filterCommands()" placeholder="Rechercher une commande...">
+        <select id="sortOptions" onchange="sortCommands()">
+            <option value="category">Catégorie</option>
+            <option value="complexity">Complexité</option>
+            <option value="usage">Usage</option>
+        </select>
+    </div>
+    <main>
+        <!-- Liste des commandes -->
+        <div id="commandList"></div>
     </main>
     <footer>
-        <p>© 2024 CodeBuddy - Créé avec ❤️</p>
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-links">
+                    <a href="https://github.com/kimo59sncf/CodeBuddy.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="#top">Retour en haut</a>
+                </nav>
+                <p>© 2024 CodeBuddy - Créé avec ❤️ Karim Mahouachi</p>
+            </div>
+        </footer>
     </footer>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

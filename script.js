@@ -905,22 +905,20 @@ const commands = [
     
     const themeButton = document.getElementById('toggle-theme');
 
-    // Restaurer le thème et l'icône enregistrés
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        themeButton.textContent = '🌞'; // Icône du soleil
-    }
-    
-    // Gérer le clic pour basculer le thème
-    themeButton.addEventListener('click', () => {
-        const isLightMode = document.body.classList.toggle('light-mode');
-        themeButton.textContent = isLightMode ? '🌞' : '🌙'; // Alterne l'icône
-        localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
-    });
-    
-    
-    
+// Restaurer le thème et l'icône enregistrés
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeButton.textContent = '🌞'; // Icône du soleil
+}
+
+// Gérer le clic pour basculer le thème
+themeButton.addEventListener('click', () => {
+    const isLightMode = document.body.classList.toggle('light-mode');
+    themeButton.textContent = isLightMode ? '🌞' : '🌙'; // Alterne l'icône
+    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+});
+
 let filteredCommands = [...commands];
 
 window.onload = function () {
@@ -942,7 +940,6 @@ function displayAllCommands(commandsToDisplay) {
 
     document.getElementById("commandList").innerHTML = commandList || "<p>Aucune commande trouvée.</p>";
 }
-
 
 function filterCommands() {
     const query = document.getElementById("searchInput").value.toLowerCase();
@@ -999,6 +996,7 @@ function exportCommands() {
     a.click();
     URL.revokeObjectURL(url);
 }
+
 function exportToPNG() {
     const content = document.getElementById("commandList");
     html2canvas(content).then(canvas => {
@@ -1010,6 +1008,7 @@ function exportToPNG() {
         console.error("Erreur lors de l'exportation en PNG :", err);
     });
 }
+
 function exportToPDF() {
     const content = document.getElementById("commandList");
     html2canvas(content).then(canvas => {
@@ -1026,77 +1025,15 @@ function exportToPDF() {
     });
 }
 
-window.onload = function() {
-    displayAllCommands(commands);
-};
-/////////////////////////////////Miniature/////////////////////////////////////////////////////////
-const { app, BrowserWindow } = require('electron');
+// Gestion de la fenêtre miniature
+const miniatureToggle = document.getElementById('miniature-toggle');
 
-let mainWindow;
-let miniWindow;
-
-app.on('ready', () => {
-    // Fenêtre principale
-    mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 768,
-        webPreferences: {
-            nodeIntegration: true,
-        },
-        icon: process.platform === 'darwin'
-            ? __dirname + '/icon.icns' // MacOS
-            : process.platform === 'win32'
-            ? __dirname + '/icon.ico' // Windows
-            : __dirname + '/icon.png' // Linux
-    });
-
-    mainWindow.loadFile('index.html');
-
-    // Gérer les événements liés à la fenêtre
-    mainWindow.on('minimize', () => {
-        // Créer une fenêtre miniature lors de la réduction
-        miniWindow = new BrowserWindow({
-            width: 300,
-            height: 200,
-            frame: false, // Pas de bordures
-            resizable: false,
-            alwaysOnTop: true,
-            webPreferences: {
-                nodeIntegration: true,
-            },
-        });
-
-        miniWindow.loadFile('index.html'); // Chargez une vue adaptée pour la miniature
-        miniWindow.setSkipTaskbar(true);
-
-        // Revenir à la fenêtre principale si on clique sur la miniature
-        miniWindow.on('focus', () => {
-            miniWindow.close();
-            mainWindow.restore();
-        });
-
-        miniWindow.on('closed', () => {
-            miniWindow = null;
-        });
-    });
-
-    mainWindow.on('restore', () => {
-        if (miniWindow) {
-            miniWindow.close();
-        }
-    });
-
-    mainWindow.on('closed', () => {
-        if (miniWindow) miniWindow.close();
-        mainWindow = null;
-    });
+miniatureToggle.addEventListener('change', () => {
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.send('toggle-miniature', miniatureToggle.checked);
 });
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
 document.getElementById('toggle-miniature').addEventListener('click', () => {
-    mainWindow.minimize();
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.send('minimize-main');
 });
